@@ -2,6 +2,9 @@ name: checkin
 on:
   schedule:
     - cron: "45 02 * * *"
+  workflow_dispatch:
+    inputs:
+      logLevel:
 
 jobs:
   sync_with_upstream:
@@ -12,7 +15,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
         with:
-          ref: master
+          ref: dev
 
       - name: checkin
         uses: actions/setup-python@v2
