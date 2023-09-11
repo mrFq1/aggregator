@@ -22,7 +22,9 @@ jobs:
         with:
           python-version: "3.x"
           architecture: "x64"
-      - run: python ./.github/actions/checkin/universal.py
+      - run: |
+          echo ${{ secrets.AP_CONFIG }} | base64 --decode > config.json
+          python auto-checkin.py
 
       - name: timestamp
         run: date
