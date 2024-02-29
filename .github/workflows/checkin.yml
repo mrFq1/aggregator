@@ -18,14 +18,16 @@ jobs:
           ref: dev
 
       - name: checkin
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: "3.x"
           architecture: "x64"
+        env:
+          AP_CONFIG: ${{secrets.AP_CONFIG}}
       - run: |
           pip install -U requests
           pip install simplejson
-          echo ${{ secrets.AP_CONFIG }} | base64 --decode > config.json
+          echo "$AP_CONFIG" | base64 --decode > config.json
           python auto-checkin.py
 
       - name: timestamp
