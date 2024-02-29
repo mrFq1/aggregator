@@ -22,12 +22,10 @@ jobs:
         with:
           python-version: "3.x"
           architecture: "x64"
-        env:
-          AP_CONFIG: ${{secrets.AP_CONFIG}}
       - run: |
           pip install -U requests
           pip install simplejson
-          echo "$AP_CONFIG" | base64 --decode > config.json
+          echo ${{secrets.AP_CONFIG}} | base64 --decode > config.json
           python auto-checkin.py
 
       - name: timestamp
